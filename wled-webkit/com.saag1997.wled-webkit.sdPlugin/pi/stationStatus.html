@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head lang="en">
+    <meta charset="utf-8" />
+    <script src="https://cdn.jsdelivr.net/gh/geekyeggo/sdpi-components@v2/dist/sdpi-components.js"></script>
+  </head>
+  <body>
+    <sdpi-item label="Title">
+      <sdpi-textarea
+        setting="title"
+        placeholder="Optional title"
+        rows="1"
+      ></sdpi-textarea>
+    </sdpi-item>
+
+    <sdpi-item label="Callsign">
+      <sdpi-textfield
+        setting="callsign"
+        placeholder="Station callsign, e.g. SEA_GND"
+        required
+      ></sdpi-textfield>
+    </sdpi-item>
+
+    <sdpi-item label="Listen to">
+      <sdpi-radio setting="listenTo" default="rx" columns="4">
+        <option value="rx">RX</option>
+        <option value="tx">TX</option>
+        <option value="xca">XCA</option>
+      </sdpi-radio>
+    </sdpi-item>
+
+    <sdpi-item label="Active comms">
+      <sdpi-file
+        setting="activeCommsImagePath"
+        accept="image/png, image/jpeg, image/svg+xml"
+      ></sdpi-file>
+    </sdpi-item>
+
+    <sdpi-item label="Listening">
+      <sdpi-file
+        setting="listeningImagePath"
+        accept="image/png, image/jpeg, image/svg+xml"
+      ></sdpi-file>
+    </sdpi-item>
+
+    <sdpi-item label="Not listening">
+      <sdpi-file
+        setting="notListeningImagePath"
+        accept="image/png, image/jpeg, image/svg+xml"
+      ></sdpi-file>
+    </sdpi-item>
+
+    <sdpi-item label="Unavailable">
+      <sdpi-file
+        setting="unavailableImagePath"
+        accept="image/png, image/jpeg, image/svg+xml"
+      ></sdpi-file>
+    </sdpi-item>
+
+    <sdpi-item>
+      <details class="sdpi-item-value">
+        <summary>Advanced options</summary>
+        <sdpi-checkbox
+          setting="showCallsign"
+          label="Show callsign"
+        ></sdpi-checkbox>
+
+        <sdpi-checkbox
+          setting="showFrequency"
+          label="Show frequency"
+        ></sdpi-checkbox>
+
+        <sdpi-checkbox
+          setting="showLastReceivedCallsign"
+          label="Show last received callsign"
+          default="true"
+        ></sdpi-checkbox>
+
+        <sdpi-checkbox
+          setting="showListenTo"
+          label="Show listen to"
+        ></sdpi-checkbox>
+
+        <sdpi-checkbox
+          setting="showTitle"
+          label="Show title"
+          default="true"
+        ></sdpi-checkbox>
+      </details>
+    </sdpi-item>
+
+    <script type="text/javascript">
+      document
+        .querySelector('[setting="listenTo"]')
+        .addEventListener("valuechange", function (ev) {
+          // Last receive callsign is only supported on rx and xca.
+          document.querySelector(
+            '[setting="showLastReceivedCallsign"]'
+          ).disabled = !(ev.target.value === "rx" || ev.target.value === "xca");
+        });
+    </script>
+  </body>
+</html>

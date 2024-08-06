@@ -5,16 +5,25 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Attach to Plugin",
+			"name": "Debug property inspectors",
+			"request": "launch",
+			"type": "msedge",
+			"url": "http://localhost:23654",
+			"webRoot": "${workspaceFolder}"
+		},
+		{
+			"name": "Debug plugin",
 			"type": "node",
 			"request": "attach",
-			"processId": "${command:PickProcess}",
+			"port": 54545,
+			"restart": true,
 			"outFiles": [
 				"${workspaceFolder}/bin/**/*.js"
 			],
 			"resolveSourceMapLocations": [
 				"${workspaceFolder}/**"
-			]
+			],
+			"preLaunchTask": "npm: watch"
 		}
 	]
 }
